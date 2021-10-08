@@ -8,9 +8,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"   integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link rel="sytlesheet" href="./assets/css/style.css"/>
-    <title>Document</title>
+    <title>Your Weather Dashboard</title>
 </head>
 <body>
+    <div class="headliner bg-image text-black p-5 rounded-3 m-3" style="background-image: url(./assets/images/weather.png);">
+        <h1 class="display-4">Your Weather Today!</h1>
+        <p class="lead">Get your local weather, or destination weather outlook.</p>
+        <hr class="my-4">
+        <p class="headliner-message">For more detailed weather information, please visit <a href="https://weather.com">The Weather Channel</a></p>
+    </div>
+    <div class="fluid-container">
+        <div class="row d-flex flex-nowrap">
+            <section class="col-lg-3 mx-3 mb-2 pb-2 bg-dark rounded-3 text-white">
+                <h5 class="mt-1">Search for City,State:</h5>
+                <div class="form-inline form-group">
+                    <input type="text" placeholder="Search" id="search-value"/>
+                    <button class="btn search-btn btn-primary" id="search-btn"><i class="fas fa-search-location"></i>"</button>
+                </div>
+                <div class="list-group pt-2">
+                    <button type="button" class="list-group-item list-group-item-action">Last City</button>
+                    <button type="button" class="list-group-item list-group-item-action">City,State</button>
+                    <button type="button" class="list-group-item list-group-item-action">City, State</button>
+                    <button type="button" class="list-group-item list-group-item-action">City, State</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>City, State</button>
+                </div>
+            </section>
+            <div class="col-lg-8 border border-primary">
+                <div id="current" class="mt3"></div>
+                <div id="forcast" class="card-deck mt-3"></div>
+            </div>
+            </div>
+        </div>
+    </div>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
