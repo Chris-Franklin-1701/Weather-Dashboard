@@ -49,6 +49,19 @@ function currentWeather(location) {
         .then(function(data){
                 console.log(data);
         
+
+        var lon = data.coord.lon
+        var lat = data.coord.lat
+        var lastURL ="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=hourly,daily&appid=d06b4b9bd23164f4a665e77178e06ab9";
+
+    fetch(lastURL)
+        .then(function(steve){
+            return steve.json();
+    })
+    .then(function(karen){
+            console.log(karen);
+
+    
         //}else{
           //  alert("Error");
        // };
@@ -68,6 +81,20 @@ function currentWeather(location) {
         $(currentMax).html(data.main.temp_max);
         $(currentMin).html(data.main.temp_min);
         
+        var uvKaren = karen.current.uvi;
+        var btn = $("<span>").addClass("btn btn-sm").text(uvKaren);
+        if (uvKaren < 3){
+            btn.addClass("btn-success");
+        } else if (uvKaren < 7){
+            btn.addClass("btn-warning");
+        } else {
+            btn.addClass("btn-danger");
+        }
+
+        $(currentUvIndex).html(btn);
+
+        
+        
         /*UVIndex(data.coord.lon, data.coord.lat);
         forcast(data.id);
         if(data.cod===200) {
@@ -86,7 +113,8 @@ function currentWeather(location) {
                     addToList(location);
                 }
             }
-        }*/
+        };*/
+    });
     });
 };
 
