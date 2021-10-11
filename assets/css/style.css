@@ -1,9 +1,18 @@
-#headliner{
+#headliner {
     color:chartreuse;
-    font-weight: bolder;
+    font-weight: bold;
+}
+
+#headliner p {
+    color: chartreuse;
+    font-weight: bold;
 }
 
 h3 {
     color:blue;
     font-weight: bold;
+}
+
+p {
+    color: blue;
 }

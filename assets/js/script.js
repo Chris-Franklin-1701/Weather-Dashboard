@@ -36,7 +36,7 @@ $(formSubmit).on("click",function(event){
     location = searchLocation.val().trim();
     console.log(location);
         currentWeather(location);
-        //futureForecast(location);
+        futureForecast(location);
 });
 
 function currentWeather(location) {
@@ -72,15 +72,15 @@ function currentWeather(location) {
         var iconUrl = "http://openweathermap.org/img/wn/"+ data.weather[0].icon +"@2x.png";
         var currentDate = new Date(data.dt*1000).toLocaleDateString();
         $(currentLocation).html(data.name + " ("+currentDate+") "+"<img src="+iconUrl+">");
-        $(currentTemp).html(data.main.temp);
-        $(currentWindSpeed).html(data.wind.speed);
+        $(currentTemp).html(data.main.temp+"°F");
+        $(currentWindSpeed).html(data.wind.speed+"MPH");
         $(currentLongitude).html(data.coord.lon);
         $(currentLatitude).html(data.coord.lat);
-        $(currentFeels).html(data.main.feels_like);
-        $(currentPressure).html(data.main.pressure);
-        $(currentHumidity).html(data.main.humidity);
-        $(currentMax).html(data.main.temp_max);
-        $(currentMin).html(data.main.temp_min);
+        $(currentFeels).html(data.main.feels_like+"°F");
+        $(currentPressure).html(data.main.pressure+"in HG");
+        $(currentHumidity).html(data.main.humidity+"%");
+        $(currentMax).html(data.main.temp_max+"°F");
+        $(currentMin).html(data.main.temp_min+"°F");
         
         var uvKaren = karen.current.uvi;
         var btn = $("<span>").addClass("btn btn-sm").text(uvKaren);
@@ -141,24 +141,39 @@ function futureForecast(location) {
     })
     .then(function(karen){
             console.log(karen);
-    });
+    
         for (i = 0; i < 7; i++){
-            var date = new Date((karen.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
-            var icon = karen.list[((i+1)*8)-1].weather[0].icon;
+            var date = new Date((karen.daily[(i+1)-1].dt)*1000).toLocaleDateString();
+            var icon = karen.daily[(i+1)-1].weather[0].icon;
             var iconUrl = "https://openweathermap.org/img/wn/"+icon+".png";
-            var temp = kareen.list[((i+1)*8)-1].daily.temp;
-            var humidity = karen.list[((i+1)*8)-1].daily.humidity;
-            var uvIndex = karen.list[((i+1)*8)-1].daily.uvi;
+            var temp = karen.daily[(i+1)-1].temp.day+"°F";
+            var humidity = karen.daily[(i+1)-1].humidity+"%";
+            var pressure = karen.daily[(i+1)-1].pressure+"inHG";
+            var uvIndex = karen.daily[(i+1)-1].uvi;
+            var uvBtn = $("<span>").addClass("btn btn-sm").text(uvIndex);
+            if (uvIndex < 3){
+                uvBtn.addClass("btn-success");
+            } else if (uvIndex < 7){
+                uvBtn.addClass("btn-warning");
+            } else {
+                uvBtn.addClass("btn-danger");
+            };
+    
+            
+
+
+
 
             $("#futureDate"+i).html(date);
             $("#futureImg"+i).html("<img src="+iconUrl+">");
             $("#futureTemp"+i).html(temp);
             $("#futureHumidity"+i).html(humidity);
-            $("#futureUvindex"+i).html(uvIndex);
+            $("#futurePressure"+i).html(pressure);
+            $("#futureUvindex"+i).html(uvBtn);
         }
 
 
-
+    });
 
 
     });
