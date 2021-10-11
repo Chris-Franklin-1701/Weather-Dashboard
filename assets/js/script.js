@@ -36,6 +36,7 @@ $(formSubmit).on("click",function(event){
     location = searchLocation.val().trim();
     console.log(location);
         currentWeather(location);
+        //futureForecast(location);
 });
 
 function currentWeather(location) {
@@ -52,7 +53,7 @@ function currentWeather(location) {
 
         var lon = data.coord.lon
         var lat = data.coord.lat
-        var lastURL ="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=hourly,daily&appid=d06b4b9bd23164f4a665e77178e06ab9";
+        var lastURL ="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units=imperial&appid=d06b4b9bd23164f4a665e77178e06ab9";
 
     fetch(lastURL)
         .then(function(steve){
@@ -118,8 +119,52 @@ function currentWeather(location) {
     });
 };
 
+function futureForecast(location) {
+    var requestURL = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&units=imperial&appid=d06b4b9bd23164f4a665e77178e06ab9";
 
 
+    fetch(requestURL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+                console.log(data);
+        
+
+        var lon = data.coord.lon
+        var lat = data.coord.lat
+        var lastURL ="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units=imperial&appid=d06b4b9bd23164f4a665e77178e06ab9";
+
+    fetch(lastURL)
+        .then(function(steve){
+            return steve.json();
+    })
+    .then(function(karen){
+            console.log(karen);
+    });
+        for (i = 0; i < 7; i++){
+            var date = new Date((karen.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+            var icon = karen.list[((i+1)*8)-1].weather[0].icon;
+            var iconUrl = "https://openweathermap.org/img/wn/"+icon+".png";
+            var temp = kareen.list[((i+1)*8)-1].daily.temp;
+            var humidity = karen.list[((i+1)*8)-1].daily.humidity;
+            var uvIndex = karen.list[((i+1)*8)-1].daily.uvi;
+
+            $("#futureDate"+i).html(date);
+            $("#futureImg"+i).html("<img src="+iconUrl+">");
+            $("#futureTemp"+i).html(temp);
+            $("#futureHumidity"+i).html(humidity);
+            $("#futureUvindex"+i).html(uvIndex);
+        }
+
+
+
+
+
+    });
+
+
+}
 /*function UVIndex (ln,lt) {
     var uvindexURL = "https://apiopenweathermap.org/data/2.5/uvi?appid="+APIkey+"&lat="+lt+"&lon="+ln+"&units=imperial";
 
