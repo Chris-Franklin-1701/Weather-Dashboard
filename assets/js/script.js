@@ -73,11 +73,11 @@ function currentWeather(location) {
         var currentDate = new Date(data.dt*1000).toLocaleDateString();
         $(currentLocation).html(data.name + " ("+currentDate+") "+"<img src="+iconUrl+">");
         $(currentTemp).html(data.main.temp+"°F");
-        $(currentWindSpeed).html(data.wind.speed+"MPH");
+        $(currentWindSpeed).html(data.wind.speed+" MPH");
         $(currentLongitude).html(data.coord.lon);
         $(currentLatitude).html(data.coord.lat);
         $(currentFeels).html(data.main.feels_like+"°F");
-        $(currentPressure).html(data.main.pressure+"in HG");
+        $(currentPressure).html(data.main.pressure+" inHG");
         $(currentHumidity).html(data.main.humidity+"%");
         $(currentMax).html(data.main.temp_max+"°F");
         $(currentMin).html(data.main.temp_min+"°F");
@@ -148,7 +148,7 @@ function futureForecast(location) {
             var iconUrl = "https://openweathermap.org/img/wn/"+icon+".png";
             var temp = karen.daily[(i+1)-1].temp.day+"°F";
             var humidity = karen.daily[(i+1)-1].humidity+"%";
-            var pressure = karen.daily[(i+1)-1].pressure+"inHG";
+            var pressure = karen.daily[(i+1)-1].pressure+" inHG";
             var uvIndex = karen.daily[(i+1)-1].uvi;
             var uvBtn = $("<span>").addClass("btn btn-sm").text(uvIndex);
             if (uvIndex < 3){
