@@ -16,7 +16,9 @@ var currentWindSpeed = $("#wind-speed");
 var currentUvIndex = $("#uv-index");
 var sCity = [];
 
-
+$(document).ready(function(){
+    $("#future-weather").hide();
+});
 //function find(c) {
   //  for (var i = 0; i < sCity.length; i++){
    //     if (c.toUpperCase()===sCity[i]){
@@ -37,6 +39,7 @@ $(formSubmit).on("click",function(event){
     console.log(location);
         currentWeather(location);
         futureForecast(location);
+        $("#future-weather").show();
 });
 
 function currentWeather(location) {
@@ -163,7 +166,7 @@ function futureForecast(location) {
 
 
 
-
+            
             $("#futureDate"+i).html(date);
             $("#futureImg"+i).html("<img src="+iconUrl+">");
             $("#futureTemp"+i).html(temp);
