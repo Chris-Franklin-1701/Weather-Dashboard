@@ -1,5 +1,4 @@
 //global variables
-
 var formSubmit = $("#search-btn");
 //var searchBtn = $("#search-btn");
 var clearBtn = $("#clear-btn");
@@ -19,20 +18,20 @@ var sCity = [];
 $(document).ready(function(){
     $("#future-weather").hide();
 });
-//function find(c) {
-  //  for (var i = 0; i < sCity.length; i++){
-   //     if (c.toUpperCase()===sCity[i]){
-  //          return -1
-  //      }
- //   }
-//    return 1;
-//}
+function find(l) {
+    for (var i = 0; i < sCity.length; i++){
+        if (l.toUpperCase()===sCity[i]){
+            return -1
+        }
+    }
+    return 1;
+}
 
 //var APIkey = "d06b4b9bd23164f4a665e77178e06ab9";
 
 $(formSubmit).on("click",function(event){
-    var searchLocation = $("#search-value");
     var location;
+    var searchLocation = $("#search-value");
     event.preventDefault();
     console.log("worked?");
     location = searchLocation.val().trim();
@@ -97,6 +96,22 @@ function currentWeather(location) {
 
         $(currentUvIndex).html(btn);
 
+        if (lastURL.cod==200) {
+            sCity=JSON.parse(localStorage.getItem("locationName"));
+            console.log(sCity);
+            if (sCity==null) {
+                sCity=[];
+                sCity.push(location.toUpperCase());
+                localStorage.setItem("locationName",JSON.stringify(sCity));
+                addToList(location);
+            }else{
+                if (find(location)>0){
+                    sCity.push(location.toUpperCase());
+                    localStorage.setItem("locationName",JSON.stringify(sCity));
+                    addToList(location);
+                }
+            }
+        }
         
         
         /*UVIndex(data.coord.lon, data.coord.lat);
@@ -182,6 +197,42 @@ function futureForecast(location) {
     });
 
 
+}
+
+
+function addToList(location) {
+    var listEl = $("<li>"+location.toUpperCase()+"</li");
+    $(listEl).attr("class", "list-group-item");
+    $(listEl).attr("data-value",location.toUpperCase());
+    $(".list-group").append(listEl);
+}
+
+function invokePastLocation(event) {
+    var liEl = event.target;
+    if (event.target.matches("li")){
+        location=liEl.textContent.trim();
+        currentWeather(location);
+    }
+}
+
+function loadLastSearch() {
+    $("ul").empty();
+    var sCity = JSON.parse(localStorage.getItem("locationName"));
+    if(sCity !== null) {
+        sCity = JSON.parse(localStorage.getItem("locationName"));
+        for(i=0; i < sCity.length; i++) {
+            addToList(sCity[i]);
+        }
+        city=sCity[i+1];
+        currentWeather(location);
+    }
+}
+
+function clearSearch(event) {
+    event.preventDefault();
+    sCity=[];
+    localStorage.removeItem("locationName");
+    document.location.reload();
 }
 /*function UVIndex (ln,lt) {
     var uvindexURL = "https://apiopenweathermap.org/data/2.5/uvi?appid="+APIkey+"&lat="+lt+"&lon="+ln+"&units=imperial";
