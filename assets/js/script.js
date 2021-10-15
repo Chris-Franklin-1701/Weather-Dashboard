@@ -213,7 +213,26 @@ $(clearBtn).on("click",function(){
     getSearchHistory();
 });
 
-    function getSearchHistory(){
+    /*function getSearchHistory(){
+        var historyItem = document.createElement("input");
+        historyItem.setAttribute("type","text");
+        historyItem.setAttribute("readonly",true);
+        historyItem.setAttribute("class", "form-control d-block bg-white");
+        historyItem.setAttribute("value",searchHistory[searchHistory.length-1]);
+        historyItem.addEventListener("click",function(){
+            currentWeather(historyItem.value);
+        })
+        historyEl.append(historyItem);
+    }*/
+
+getSearchHistory();
+if (searchHistory.length > 0){
+    currentWeather(searchHistory[searchHistory.length-1]);
+};
+
+
+function getSearchHistory(){
+    historyEl.html("");
     for (var i = 0; i < searchHistory.length;i++){
         var historyItem = document.createElement("input");
         historyItem.setAttribute("type","text");
@@ -226,12 +245,6 @@ $(clearBtn).on("click",function(){
         historyEl.append(historyItem);
     }
 }
-
-getSearchHistory();
-if (searchHistory.length > 0){
-    currentWeather(searchHistory[searchHistory.length-1]);
-};
-
 /*function clearHistory(event){
     sCity = [];
     localStorage.removeItem(location);
