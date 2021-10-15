@@ -26,3 +26,7 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Contact
+CFrank306@gmail.com
+https://github.com/SilverSSSC
