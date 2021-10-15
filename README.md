@@ -4,6 +4,8 @@ This is a simple weather dashboard that shows the current and future forecast fo
 
 ![Preview of the project](./weather-dashboard.png)
 
+![Preview of the project](./weather-dashboard2.png)
+
 ## Live installation
 
 https://silversssc.github.io/Weather-Dashboard/
