@@ -20,6 +20,8 @@ console.log(searchHistory);
 
 $(document).ready(function(){
     $("#future-weather").hide();
+    currentWeather(searchHistory[searchHistory.length-1])
+    futureForecast(searchHistory[searchHistory.length-1]);
 });
 function find(l) {
     for (var i = 0; i < sCity.length; i++){
@@ -77,7 +79,7 @@ function currentWeather(location) {
     //});
         
         //var weatherIcon = (data.weather[0].icon);
-        var iconUrl = "http://openweathermap.org/img/wn/"+ data.weather[0].icon +"@2x.png";
+        var iconUrl = "https://openweathermap.org/img/wn/"+ data.weather[0].icon +"@2x.png";
         var currentDate = new Date(data.dt*1000).toLocaleDateString();
         $(currentLocation).html(data.name + " ("+currentDate+") "+"<img src="+iconUrl+">");
         $(currentTemp).html(data.main.temp+"°F");
@@ -227,7 +229,8 @@ $(clearBtn).on("click",function(){
 
 getSearchHistory();
 if (searchHistory.length > 0){
-    currentWeather(searchHistory[searchHistory.length-1]);
+    currentWeather(searchHistory[searchHistory.length]);
+    futureForecast(searchHistory[searchHistory.length]);
 };
 
 
