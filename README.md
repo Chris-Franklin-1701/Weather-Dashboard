@@ -19,6 +19,11 @@ Use git clone to clone this repository to your local drive
 git clone "insert repo"
 '''
 
+## References
+Inspiration from 3rd party:
+    - https://github.com/RyanEllingson/Weather-Dashboard
+    - https://github.com/sahiljanbandhu/Weather-Dashboard
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
